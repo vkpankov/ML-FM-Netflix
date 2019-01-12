@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ML-FM-Netflix", "ML-FM-Netflix.csproj", "{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Debug|x64.ActiveCfg = Debug|x64
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Debug|x64.Build.0 = Debug|x64
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Release|x64.ActiveCfg = Release|x64
+		{FC922B0F-6259-4E4F-B1AD-1127B8EFFEE6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E04DD499-FF14-4C84-A2E2-E8DD109A8F93}
+	EndGlobalSection
+EndGlobal
