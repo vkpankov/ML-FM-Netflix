@@ -61,27 +61,27 @@ namespace ML_FM_Netflix
         }
 
 
-        public void GradDescent(Vector<double> x, double ty, double learningRate, double vReg, double wReg)
+        public void GradDescent(Vector<double> x, double ty, double learningRate)
         {
             int n = x.Count;
             Vector<double> vxSums;
             double ie = -2 * (ty - Predict(x, out vxSums));
-            w0 = w0 - learningRate * (ie +Math.Sign(w0)* wReg*w0);
+            w0 = w0 - learningRate * ie;
             foreach (var i in x.EnumerateIndexed(Zeros.AllowSkip))
             {
-                w[i.Item1] = w[i.Item1] - learningRate * (i.Item2 * ie + Math.Sign(w[i.Item1])*wReg*w[i.Item1]);
+                w[i.Item1] = w[i.Item1] - learningRate * (i.Item2 * ie);
             }
             for (int f = 0; f < V.ColumnCount; f++)
             {
                 foreach (var i in x.EnumerateIndexed(Zeros.AllowSkip))
                 {
                     V[i.Item1, f] = V[i.Item1, f] - learningRate *
-                        ((i.Item2 * vxSums[f] - V[i.Item1, f] * Math.Pow(i.Item2, 2)) * ie + Math.Sign(V[i.Item1,f])*vReg * V[i.Item1, f]);
+                        ((i.Item2 * vxSums[f] - V[i.Item1, f] * Math.Pow(i.Item2, 2)) * ie);
                 }
             }
         }
 
-        public double Learn(List<Chunk> trainData, int skipIndex, double learningRate, int itCount, double err = 1.08, double vReg = 0, double wReg = 0)
+        public double Learn(List<Chunk> trainData, int skipIndex, double learningRate, int itCount, double err = 1.08)
         {
             double rmse = 5;
             for (int it = 0; it < itCount; it++)
@@ -92,7 +92,7 @@ namespace ML_FM_Netflix
                         continue;
                     for (int i = 0; i < trainData[k].X.RowCount; i++)
                     {
-                        this.GradDescent(trainData[k].X.Row(i), trainData[k].Y[i], learningRate, vReg, wReg);
+                        this.GradDescent(trainData[k].X.Row(i), trainData[k].Y[i], learningRate);
                     }
                 }
                 Vector<double> testEval = this.Predict(trainData[skipIndex].X);
