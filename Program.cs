@@ -31,10 +31,10 @@ namespace ML_FM_Netflix
             const int usersCount = 470758, moviesCount = 4500;
             const double targetMin = 1, targetMax = 5;
             const int VSize = 3;
-            const double learningRate = 0.001;
+            const double learningRate = 0.008;
             const double maxError = 1.08;
             const int maxIterations = 4;
-            const int batchCount = 15500;
+            const int batchCount = 10000;
 
             List<Rate> rates = NetflixDataHelper.ReadDataSet( @"combined_data_1.txt");
             Console.WriteLine("Dataset read: " + rates.Count + " records");
