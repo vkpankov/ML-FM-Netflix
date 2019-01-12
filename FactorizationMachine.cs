@@ -104,29 +104,5 @@ namespace ML_FM_Netflix
             }
             return rmse;
         }
-
-
-        /*public double GradDescent(Matrix<double> x, Vector<double> ty, double learningRate)
-        {
-            int n = x.ColumnCount;
-            Vector<double> e = ty - Predict(x);
-            Vector<double> vxSums = Vector<double>.Build.Random(V.ColumnCount);
-            foreach (var j in x.EnumerateIndexed(Zeros.AllowSkip))
-                for (int f = 0; f < V.ColumnCount; f++)
-                    vxSums[f] += V[j.Item1, f] * j.Item2;
-
-            w0 = w0 - learningRate * e;
-            foreach (var i in x.EnumerateIndexed(Zeros.AllowSkip))
-            {
-                w[i.Item1] = w[i.Item1] - learningRate * i.Item2 * e;
-                for (int f = 0; f < V.ColumnCount; f++)
-                {
-                    V[i.Item1, f] = V[i.Item1, f] - learningRate *
-                        (i.Item2 * vxSums[f] - V[i.Item1, f] * i.Item2 * i.Item2) * e;
-                }
-            }
-            return e;
-        }*/
-
     }
 }
