@@ -13,7 +13,7 @@ namespace ML_FM_Netflix
 {
     public static class NetflixDataHelper
     {
-        public static void Shuffle(ref List<Chunk> data)
+        public static void Shuffle<T>(ref List<T> data)
         {
             Random rng = new Random();
             int n = data.Count;
@@ -26,6 +26,23 @@ namespace ML_FM_Netflix
                 data[n] = value;
             }
         }
+        public static void Shuffle(Chunk chunk)
+        {
+            Random rng = new Random();
+            int n = chunk.X.RowCount;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                var valueX = chunk.X.Row(k);
+                var valueY = chunk.Y[k];
+                chunk.X.SetRow(k, chunk.X.Row(n));
+                chunk.Y[k] = chunk.Y[n];
+                chunk.X.SetRow(n, valueX);
+                chunk.Y[n] = valueY;
+            }
+        }
+
 
         public static List<Rate> ReadDataSet(string fileName, int totalGradeCount = 24053764, int userCount = 470758, int movieCount = 4500)
         {

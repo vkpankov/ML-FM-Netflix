@@ -30,8 +30,8 @@ namespace ML_FM_Netflix
         {
             const int usersCount = 470758, moviesCount = 4500;
             const double targetMin = 1, targetMax = 5;
-            const int VSize = 3;
-            const double learningRate = 0.008;
+            const int VSize = 5;
+            const double learningRate = 0.02;
             const double maxError = 1.08;
             const int maxIterations = 4;
             const int batchCount = 10000;
@@ -46,8 +46,6 @@ namespace ML_FM_Netflix
 
             for (int k = 0; k < chunks.Count; k++)
             {
-                int startTime = Environment.TickCount;
-                NetflixDataHelper.Shuffle(ref chunks);
                 FactorizationMachine fm =
                     new FactorizationMachine(chunks[0].X.ColumnCount, VSize, targetMin, targetMax, 0.1);
                 double kRMSE = fm.Learn(chunks, k, learningRate, maxIterations, maxError);
@@ -55,6 +53,7 @@ namespace ML_FM_Netflix
             }
             var rmseMean = rmseChunks.Mean();
             var rmseStdDev = rmseChunks.StandardDeviation();
+
             Console.WriteLine("RMSE mean: " + rmseMean + "+-" + rmseStdDev);
             Console.ReadKey();
         }

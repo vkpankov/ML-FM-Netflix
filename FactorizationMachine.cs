@@ -15,6 +15,7 @@ namespace ML_FM_Netflix
         Vector<double> w;
         double w0;
         double yMin, yMax;
+        Random rnd = new Random();
 
         public FactorizationMachine(int n, int k, double targetMin, double targetMax,  double stddev = 1)
         {
@@ -84,21 +85,29 @@ namespace ML_FM_Netflix
         public double Learn(List<Chunk> trainData, int skipIndex, double learningRate, int itCount, double err = 1.08)
         {
             double rmse = 5;
+            
             for (int it = 0; it < itCount; it++)
             {
-                for(int k = 0; k<trainData.Count; k++)
+                int startTime = Environment.TickCount;
+                NetflixDataHelper.Shuffle(ref trainData);
+                for (int k = 0; k<trainData.Count; k++)
                 {
                     if (k == skipIndex)
                         continue;
-                    for (int i = 0; i < trainData[k].X.RowCount; i++)
+                    Chunk chunk = trainData[k];
+                    int n = chunk.X.RowCount;
+                    while (n > 1)
                     {
-                        this.GradDescent(trainData[k].X.Row(i), trainData[k].Y[i], learningRate);
+                        n--;
+                        int m = rnd.Next(n + 1);
+                        this.GradDescent(chunk.X.Row(m), chunk.Y[m], learningRate);
                     }
                 }
                 Vector<double> testEval = this.Predict(trainData[skipIndex].X);
                 Vector<double> e = testEval - trainData[skipIndex].Y;
                 rmse = Math.Sqrt(e.PointwisePower(2).Sum() / e.Count);
-                Console.WriteLine($"Test batch - {skipIndex}, iteration - {it}, rmse: {rmse}");
+                var time = (Environment.TickCount - startTime) / 1000.0;
+                Console.WriteLine($"Test batch - {skipIndex}, iteration - {it}, rmse: {rmse}, time: {time}");
                 if (rmse < err)
                     break;
             }
